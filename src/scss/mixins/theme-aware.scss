@@ -1,0 +1,17 @@
+@import '../constants/color-palette.scss';
+
+@mixin theme-aware($key, $color) {
+  @each $theme-name, $theme-color in $themes {
+    :global(.theme-#{$theme-name}) & {
+      #{$key}: map-get(map-get($themes, $theme-name), $color);
+    }
+  }
+}
+
+@mixin theme-aware-shadow($x, $y, $blur, $spread, $color) {
+  @each $theme-name, $theme-color in $themes {
+    :global(.theme-#{$theme-name}) & {
+      box-shadow: #{$x} #{$y} #{$blur} #{$spread} map-get(map-get($themes, $theme-name), $color);
+    }
+  }
+}

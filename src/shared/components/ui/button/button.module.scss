@@ -1,0 +1,66 @@
+@import "../../../../scss/mixins/theme-aware.scss";
+@import "../../../../scss/constants/fonts.scss";
+
+.button {
+  padding: 5px 15px;
+  @include theme-aware("color", "text-main-color");
+  @include theme-aware("background", "light-color");
+  border-radius: 5px;
+  border: 2px solid transparent;
+  text-transform: uppercase;
+  font-weight: 600;
+
+  &_medium {
+    font-size: $font-size-m;
+    border-radius: 8px;
+    padding: 6px 18px;
+  }
+
+  &_round {
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    width: 30px;
+    min-width: 30px;
+    height: 30px;
+    min-height: 30px;
+  }
+
+  transition: background 0.1s ease;
+
+  &:hover {
+    cursor: pointer;
+    @include theme-aware("background", "lighter-color");
+  }
+
+  &:hover:active {
+    cursor: pointer;
+    @include theme-aware("background", "third-color");
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    @include theme-aware("background", "light-color");
+    &:hover {
+      cursor: default;
+    }
+    &:active {
+      opacity: 0.7;
+      @include theme-aware("background", "light-color");
+    }
+  }
+}
+
+.button_round.button_medium {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+}
+
+.button_full-width {
+  width: 100%;
+}

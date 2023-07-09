@@ -1,0 +1,18 @@
+$font-size-s: 0.75rem;
+$font-size-m: 1rem;
+$font-size-l: 1.25rem;
+$font-size-xl: 1.5rem;
+$font-size-xxl: 2rem;
+
+$main-font: Montserrat;
+$second-font: Nunito;
+
+@font-face {
+  font-family: Montserrat;
+  src: url(/src/assets/fonts/Montserrat-VariableFont_wght.ttf);
+}
+
+@font-face {
+  font-family: Nunito;
+  src: url(/src/assets/fonts/Nunito-VariableFont_wght.ttf);
+}

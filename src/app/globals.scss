@@ -1,0 +1,28 @@
+//@import './scss/constants/fonts.scss';
+@import "../scss/mixins/breakpoints.scss";
+@import "../scss/mixins/theme-aware.scss";
+@import "../scss/constants/fonts.scss";
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  font-family: $main-font;
+  @include theme-aware("color", "text-color");
+
+  @include sm {
+    font-size: 16px;
+  }
+  @include md {
+    font-size: 18px;
+  }
+  @include lg {
+    font-size: 20px;
+  }
+  @include xl {
+    font-size: 24px;
+  }
+}

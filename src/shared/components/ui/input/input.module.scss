@@ -1,0 +1,49 @@
+@import "../../../../scss/mixins/theme-aware.scss";
+
+$input-horizontal-padding: 5px;
+
+.input {
+  padding: 5px $input-horizontal-padding;
+  box-sizing: border-box;
+  @include theme-aware("background", "light-color");
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+
+  border-radius: 10px;
+  &_full-width {
+    width: 100%;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    height: 1px;
+    width: 0;
+    transition: width 0.2s ease;
+    background: #fff;
+  }
+
+  &:focus-within::after {
+    width: calc(100% - $input-horizontal-padding - 10px);
+  }
+}
+
+.input__form {
+  width: 100%;
+  background: transparent;
+  padding: 0;
+  outline: none;
+  font-size: inherit;
+  border: none;
+  color: #fff;
+  &::placeholder {
+    @include theme-aware("color", "placeholder-color");
+  }
+}
+
+.input__label {
+}
