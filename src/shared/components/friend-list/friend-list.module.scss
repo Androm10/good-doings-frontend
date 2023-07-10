@@ -1,0 +1,16 @@
+.friend-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.friend-list__add-friend {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.friend-list__add-friend-error {
+  color: red;
+}

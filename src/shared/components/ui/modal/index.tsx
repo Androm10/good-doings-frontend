@@ -5,16 +5,16 @@ import s from "./modal.module.scss";
 
 interface ModalProps {
   title?: string;
-  isHidden: boolean;
-  setHidden: (value: boolean) => void;
+  isVisible: boolean;
+  setVisible: (value: boolean) => void;
   children: ReactNode;
 }
 
 const Modal: FC<ModalProps> = memo((props: ModalProps) => {
-  const { title, children, isHidden, setHidden } = props;
+  const { title, children, isVisible, setVisible } = props;
 
   const clickHandler = (event?: MouseEvent) => {
-    setHidden(true);
+    setVisible(false);
   };
 
   return ReactDOM.createPortal(
@@ -22,7 +22,7 @@ const Modal: FC<ModalProps> = memo((props: ModalProps) => {
       className={[
         s.modal,
         classNames({
-          [s.modal_hidden]: isHidden,
+          [s.modal_hidden]: !isVisible,
         }),
       ].join(" ")}
       onClick={clickHandler}

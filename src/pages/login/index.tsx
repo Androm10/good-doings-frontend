@@ -1,8 +1,9 @@
-import { FC } from "react";
+import { FC, ReactElement } from "react";
+import { NextPageWithLayout } from "../_app";
 import LoginForm from "./components/login-form";
 import s from "./login-page.module.scss";
 
-const LoginPage: FC = () => {
+const LoginPage: NextPageWithLayout = () => {
   return (
     <div className={s["login-page"]}>
       <div className={s["login-page__form"]}>
@@ -11,6 +12,10 @@ const LoginPage: FC = () => {
       </div>
     </div>
   );
+};
+
+LoginPage.getLayout = function getLayout(page: ReactElement) {
+  return page;
 };
 
 export default LoginPage;

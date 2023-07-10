@@ -6,6 +6,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  @include theme-aware("color", "text-main-color");
 }
 
 .signup-page__form {

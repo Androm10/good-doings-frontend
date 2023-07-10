@@ -1,0 +1,16 @@
+.doing-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.doing-list__add-doing {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.doing-list__add-doing-error {
+  color: red;
+}

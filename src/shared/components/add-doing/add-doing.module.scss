@@ -1,0 +1,9 @@
+.add-doing {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.add-doing__error {
+  color: red;
+}

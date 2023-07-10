@@ -1,24 +1,21 @@
 "use client";
 
-import { useAppDispatch } from "@/shared/hooks/app-dispatch.hook";
-import { useAppSelector } from "@/shared/hooks/app-selector.hook";
-import { fetchProfile } from "@/shared/store/slices/user.slice";
-import { FC, PropsWithChildren, useEffect } from "react";
+import { useUser } from "@/shared/hooks/use-user.hook";
+import { FC, PropsWithChildren, ReactNode, useEffect } from "react";
 
-const RequireUser: FC<PropsWithChildren> = ({
+interface RequireUserOwnProps {
+  fallback?: ReactNode;
+}
+
+type RequireUserProps = RequireUserOwnProps & PropsWithChildren;
+
+const RequireUser: FC<RequireUserProps> = ({
   children,
-}: PropsWithChildren) => {
-  const { user } = useAppSelector((state) => state.userReducer);
+  fallback,
+}: RequireUserProps) => {
+  const { user, isLoading, error } = useUser();
 
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if (!user) {
-      dispatch(fetchProfile());
-    }
-  }, []);
-
-  return <>{user ? <>{children}</> : <></>}</>;
+  return <>{user ? <>{children}</> : <>{fallback}</>}</>;
 };
 
 export default RequireUser;

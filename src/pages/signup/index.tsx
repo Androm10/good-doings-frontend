@@ -1,8 +1,9 @@
-import { FC } from "react";
+import { FC, ReactElement } from "react";
 import SignupForm from "./components/signup-form";
 import s from "./signup-page.module.scss";
+import type { NextPageWithLayout } from "../_app";
 
-const SignupPage: FC = () => {
+const SignupPage: NextPageWithLayout = () => {
   return (
     <div className={s["signup-page"]}>
       <div className={s["signup-page__form"]}>
@@ -11,6 +12,10 @@ const SignupPage: FC = () => {
       </div>
     </div>
   );
+};
+
+SignupPage.getLayout = function getLayout(page: ReactElement) {
+  return page;
 };
 
 export default SignupPage;

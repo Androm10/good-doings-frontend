@@ -2,11 +2,12 @@
 
 import Button from "@/shared/components/ui/button";
 import { useAppSelector } from "@/shared/hooks/app-selector.hook";
+import { useUser } from "@/shared/hooks/use-user.hook";
 import Link from "next/link";
 import { FC } from "react";
 
 const Profile: FC = () => {
-  const { user } = useAppSelector((state) => state.userReducer);
+  const { user } = useUser();
 
   if (!user) {
     return (

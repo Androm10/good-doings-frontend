@@ -1,0 +1,9 @@
+.add-friend {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.add-friend__error {
+  color: red;
+}

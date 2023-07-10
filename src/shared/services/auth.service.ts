@@ -1,30 +1,17 @@
 import { UserEntity } from "@/core/entities/user.entity";
 import { LoginBackendData } from "@/core/types/backend/login-backend-data";
-import { BASE_URL } from "../constants/api";
+import { ApiService } from "./api.service";
 import { JwtService } from "./jwt.service";
 
 class AuthService {
   async login(login: string, password: string) {
-    const res = await fetch(`${BASE_URL}/auth/login`, {
-      method: "POST",
-      body: JSON.stringify({
+    const data: LoginBackendData =
+      await ApiService.Instance.post<LoginBackendData>("/auth/login", {
         login,
         password,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (!res.ok) {
-      const data = await res.json();
-      throw new Error(data.message);
-    }
-
-    const data: LoginBackendData = await res.json();
+      });
     JwtService.setAccessToken(data.accessToken);
     JwtService.setRefreshToken(data.refreshToken);
-    return data;
   }
 
   async signup(
@@ -33,25 +20,13 @@ class AuthService {
     password: string,
     confirmPassword: string
   ) {
-    const res = await fetch(`${BASE_URL}/auth/signup`, {
-      method: "POST",
-      body: JSON.stringify({
-        login,
-        password,
-        username,
-        confirmPassword,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
+    const data = await ApiService.Instance.post<UserEntity>("/auth/signup", {
+      login,
+      username,
+      password,
+      confirmPassword,
     });
 
-    if (!res.ok) {
-      const data = await res.json();
-      throw new Error(data.message);
-    }
-
-    const data: UserEntity = await res.json();
     return data;
   }
 }
