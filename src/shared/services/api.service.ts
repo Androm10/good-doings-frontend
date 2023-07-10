@@ -82,6 +82,17 @@ export class ApiService {
     }
   }
 
+  async delete<T>(path: string, headers?: AxiosHeaders): Promise<T> {
+    const config = headers ? this.applyHeadersConfig(headers) : this.baseConfig;
+    try {
+      const response = await this.axiosInstance.delete<T>(path, config);
+      return response.data;
+    } catch (error) {
+      this.handleRequestError(error);
+      throw new Error("Unhandled error");
+    }
+  }
+
   private applyHeadersConfig(headers: AxiosHeaders) {
     const config = this.baseConfig;
     config.headers = { ...this.baseConfig.headers, ...headers };

@@ -40,6 +40,7 @@ const FriendList: FC<FriendListProps> = (props: FriendListProps) => {
 
   const friendAddedHandler = (friend: UserEntity) => {
     setFriends((prev) => [...prev, friend]);
+    setModal(false);
   };
 
   return (

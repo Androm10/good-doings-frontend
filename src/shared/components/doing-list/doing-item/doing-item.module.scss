@@ -1,0 +1,25 @@
+@import "../../../../scss/mixins/theme-aware.scss";
+@import "../../../../scss/constants/fonts.scss";
+
+.doing-item {
+  display: flex;
+  @include theme-aware-shadow(0, 0, 5px, 0, "shadow-color");
+  flex: 1;
+}
+
+.doing-item__name {
+  flex: 2;
+  @include theme-aware-shadow(1px, 0, 0, 0, "shadow-color");
+  padding: 5px;
+}
+
+.doing-item__label {
+  @include theme-aware("color", "text-second-color");
+  font-size: $font-size-s;
+  display: block;
+}
+
+.doing-item__description {
+  flex: 4;
+  padding: 5px;
+}

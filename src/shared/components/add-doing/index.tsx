@@ -53,7 +53,7 @@ const AddDoing: FC<AddDoing> = ({ onDoingAdded }: AddDoing) => {
               onChange={(e) => setDescription(e.target.value)}
             />
           </div>
-          <Button size="medium" as="button">
+          <Button size="medium" as="button" onClick={addDoingHandler}>
             Add doing
           </Button>
           <div className={s["add-doing__error"]}>{addDoingError}</div>
