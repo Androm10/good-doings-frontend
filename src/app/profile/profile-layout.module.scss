@@ -1,0 +1,8 @@
+@import "../../scss/mixins/theme-aware.scss";
+
+.profile-layout__header {
+  width: 100%;
+  height: 20px;
+  @include theme-aware("background", "main-color");
+  box-shadow: 1px 1px 0 black;
+}
