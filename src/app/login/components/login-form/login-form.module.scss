@@ -1,0 +1,26 @@
+@import "../../../../scss/mixins/theme-aware.scss";
+
+.login-form {
+  white-space: nowrap;
+}
+
+.login-form__field + .login-form__field {
+  margin-top: 20px;
+}
+
+.login-form__submit {
+  margin-top: 10px;
+  color: #fff;
+}
+
+.login-form__hint {
+  @include theme-aware("color", "text-second-color");
+  text-align: center;
+  width: 100%;
+  margin: 5px 0;
+}
+
+.login-form__error {
+  color: red;
+  text-align: center;
+}

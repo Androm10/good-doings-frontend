@@ -1,0 +1,27 @@
+@import "../../../../scss/mixins/theme-aware.scss";
+
+.signup-form {
+  white-space: nowrap;
+  position: relative;
+}
+
+.signup-form__field + .signup-form__field {
+  margin-top: 20px;
+}
+
+.signup-form__submit {
+  margin-top: 10px;
+  color: #fff;
+}
+
+.signup-form__hint {
+  @include theme-aware("color", "text-second-color");
+  text-align: center;
+  width: 100%;
+  margin: 5px 0;
+}
+
+.signup-form__error {
+  color: red;
+  text-align: center;
+}

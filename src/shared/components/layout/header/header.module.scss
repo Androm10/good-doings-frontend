@@ -1,0 +1,43 @@
+@import "../../../../scss/constants/fonts.scss";
+@import "../../../../scss/mixins/theme-aware.scss";
+
+.header {
+  font-size: $font-size-m;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: inherit;
+  flex: 1;
+  white-space: nowrap;
+}
+
+.header__nav {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.header__link {
+  text-decoration: none;
+  @include theme-aware("color", "text-second-color");
+  &:hover {
+    cursor: pointer;
+    @include theme-aware("color", "text-main-color");
+  }
+}
+
+.header__logo {
+  font-size: $font-size-l;
+}
+
+.header__links {
+  display: flex;
+  gap: 10px;
+}
+
+.header__actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}

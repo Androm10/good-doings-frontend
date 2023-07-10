@@ -1,0 +1,17 @@
+@import "../../scss/mixins/theme-aware.scss";
+
+.login-page {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-page__form {
+  width: 60%;
+  border-radius: 10px;
+  @include theme-aware-shadow(0, 0, 5px, 0, "shadow-color");
+  @include theme-aware("background", "main-color");
+  padding: 20px;
+}

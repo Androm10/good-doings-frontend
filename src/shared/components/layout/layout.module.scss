@@ -1,0 +1,38 @@
+@import "../../../scss/constants/fonts.scss";
+@import "../../../scss/mixins/theme-aware.scss";
+
+$header-height: calc($font-size-m * 4);
+$footer-height: calc($font-size-m * 6);
+
+.layout {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.layout__header {
+  min-height: $header-height;
+  height: fit-content;
+  padding: 0 5px;
+  box-sizing: border-box;
+  display: flex;
+  @include theme-aware("color", "text-main-color");
+  @include theme-aware("background", "main-color");
+  @include theme-aware-shadow(0, 1px, 0px, 0px, "shadow-color");
+}
+
+.layout__body {
+  padding-top: $header-height;
+  height: 100%;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.layout__footer {
+  height: auto;
+  @include theme-aware-shadow(0, -1px, 0px, 0px, "shadow-color");
+}
