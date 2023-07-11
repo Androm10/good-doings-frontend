@@ -4,6 +4,7 @@ import { ApiService } from "@/shared/services/api.service";
 import { buildQuery } from "@/shared/utils/build-query";
 import { FC, useEffect, useState } from "react";
 import AddFriend from "../add-friend";
+import DoingList from "../doing-list";
 import Button from "../ui/button";
 import Input from "../ui/input";
 import Modal from "../ui/modal";
@@ -28,6 +29,9 @@ const FriendList: FC<FriendListProps> = (props: FriendListProps) => {
   const [friends, setFriends] = useState<UserEntity[]>([]);
   const [isModal, setModal] = useState(false);
 
+  const [isDoingModal, setDoingModal] = useState(false);
+  const [friendId, setFriendId] = useState<number>();
+
   useEffect(() => {
     reloadFriends();
   }, [userId]);
@@ -43,6 +47,11 @@ const FriendList: FC<FriendListProps> = (props: FriendListProps) => {
     setModal(false);
   };
 
+  const clickDoingsHandler = (friendId: number) => {
+    setFriendId(friendId);
+    setDoingModal(true);
+  };
+
   return (
     <div className={s["friend-list"]}>
       <Button as="button" onClick={() => setModal(!isModal)}>
@@ -51,7 +60,12 @@ const FriendList: FC<FriendListProps> = (props: FriendListProps) => {
       {friends.length ? (
         <div>
           {friends.map((friend) => (
-            <div key={friend.id}> {friend.username}</div>
+            <div key={friend.id} className={s["friend-list__item"]}>
+              <div> {friend.username}</div>
+              <Button as="button" onClick={() => clickDoingsHandler(friend.id)}>
+                Doings
+              </Button>
+            </div>
           ))}
         </div>
       ) : (
@@ -59,6 +73,13 @@ const FriendList: FC<FriendListProps> = (props: FriendListProps) => {
       )}
       <Modal isVisible={isModal} setVisible={setModal} title="Add friend">
         <AddFriend onFriendAdded={friendAddedHandler} />
+      </Modal>
+      <Modal
+        isVisible={isDoingModal}
+        setVisible={setDoingModal}
+        title="Friend's doings"
+      >
+        {!!friendId && <DoingList userId={friendId} />}
       </Modal>
     </div>
   );

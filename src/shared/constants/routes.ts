@@ -4,5 +4,5 @@ export const routes = {
   login: "/login",
   signup: "/signup",
   doings: "/profile/doings",
-  friends: "/profile/friends",
+  users: "/users",
 };

@@ -1,5 +1,6 @@
 import { DoingEntity } from "@/core/entities/doing.entity";
 import { Paginated } from "@/core/types/paginated";
+import { useUser } from "@/shared/hooks/use-user.hook";
 import { ApiService } from "@/shared/services/api.service";
 import { buildQuery } from "@/shared/utils/build-query";
 import { FC, useEffect, useState } from "react";
@@ -38,6 +39,7 @@ function updateDoing(
 
 const DoingList: FC<DoingListProps> = (props: DoingListProps) => {
   const { userId } = props;
+  const { user } = useUser();
   const [page, setPage] = useState(0);
   const [doings, setDoings] = useState<DoingEntity[]>([]);
 
@@ -115,30 +117,34 @@ const DoingList: FC<DoingListProps> = (props: DoingListProps) => {
   return (
     <>
       <div className={s["doing-list"]}>
-        <Button as="button" onClick={() => setModal(!isModal)}>
-          Add doing
-        </Button>
+        {!!user && userId == user.id && (
+          <Button as="button" onClick={() => setModal(!isModal)}>
+            Add doing
+          </Button>
+        )}
         {doings.length ? (
           <>
             {doings.map((doing) => (
               <div key={doing.id} className={s["doing-list__item"]}>
                 <DoingItem doing={doing} />
-                <div className={s["doing-list__actions"]}>
-                  <Button
-                    as="button"
-                    round
-                    onClick={() => deleteDoingHandler(doing.id)}
-                  >
-                    <CrossSvg />
-                  </Button>
-                  <Button
-                    as="button"
-                    round
-                    onClick={() => startEditHandler(doing.id)}
-                  >
-                    <PenSvg />
-                  </Button>
-                </div>
+                {!!user && userId == user.id && (
+                  <div className={s["doing-list__actions"]}>
+                    <Button
+                      as="button"
+                      round
+                      onClick={() => deleteDoingHandler(doing.id)}
+                    >
+                      <CrossSvg />
+                    </Button>
+                    <Button
+                      as="button"
+                      round
+                      onClick={() => startEditHandler(doing.id)}
+                    >
+                      <PenSvg />
+                    </Button>
+                  </div>
+                )}
               </div>
             ))}
           </>

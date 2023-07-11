@@ -14,3 +14,8 @@
 .friend-list__add-friend-error {
   color: red;
 }
+
+.friend-list__item {
+  display: flex;
+  gap: 10px;
+}

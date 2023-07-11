@@ -13,11 +13,8 @@ const Header: FC = () => {
         <h2 className={s.header__logo}>Good Doings</h2>
         <nav className={s.header__links}>
           <RequireUser>
-            <Link href={routes.doings} className={s.header__link}>
-              My Doings
-            </Link>
-            <Link href={routes.friends} className={s.header__link}>
-              Friends
+            <Link href={routes.users} className={s.header__link}>
+              Users
             </Link>
             <Link href={routes.profile} className={s.header__link}>
               Profile

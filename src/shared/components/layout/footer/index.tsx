@@ -8,11 +8,8 @@ const Footer: FC = () => {
     <div className={s.footer}>
       <h2 className={s.footer__logo}>Good Doings</h2>
       <nav className={s.footer__nav}>
-        <Link href={routes.doings} className={s.footer__link}>
-          My Doings
-        </Link>
-        <Link href={routes.friends} className={s.footer__link}>
-          Friends
+        <Link href={routes.users} className={s.footer__link}>
+          Users
         </Link>
         <Link href={routes.profile} className={s.footer__link}>
           Profile
