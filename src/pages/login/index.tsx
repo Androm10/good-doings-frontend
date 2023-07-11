@@ -1,6 +1,6 @@
 import { FC, ReactElement } from "react";
 import { NextPageWithLayout } from "../_app";
-import LoginForm from "./components/login-form";
+import LoginForm from "@shared/components/auth/login-form";
 import s from "./login-page.module.scss";
 
 const LoginPage: NextPageWithLayout = () => {

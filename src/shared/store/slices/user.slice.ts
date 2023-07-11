@@ -1,7 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { UserEntity } from "@/core/entities/user.entity";
-import { BASE_URL } from "@/shared/constants/api";
-import { JwtService } from "@/shared/services/jwt.service";
 import { ApiService } from "@/shared/services/api.service";
 
 interface UserState {

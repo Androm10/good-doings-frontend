@@ -1,12 +1,12 @@
 import { UserEntity } from "@/core/entities/user.entity";
 import { Paginated } from "@/core/types/paginated";
+import { useScroll } from "@/shared/hooks/use-scroll";
 import { ApiService } from "@/shared/services/api.service";
 import { buildQuery } from "@/shared/utils/build-query";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import AddFriend from "../add-friend";
 import DoingList from "../doing-list";
 import Button from "../ui/button";
-import Input from "../ui/input";
 import Modal from "../ui/modal";
 import Spinner from "../ui/spinner";
 import s from "./friend-list.module.scss";
@@ -25,22 +25,24 @@ function fetchFriends(userId: number, page: number) {
 
 const FriendList: FC<FriendListProps> = (props: FriendListProps) => {
   const { userId } = props;
-  const [page, setPage] = useState(0);
   const [friends, setFriends] = useState<UserEntity[]>([]);
   const [isModal, setModal] = useState(false);
 
   const [isDoingModal, setDoingModal] = useState(false);
   const [friendId, setFriendId] = useState<number>();
 
-  useEffect(() => {
-    reloadFriends();
-  }, [userId]);
+  const listRef = useRef<HTMLDivElement>(null);
 
-  const reloadFriends = async () => {
-    setPage(0);
-    const data = await fetchFriends(userId, 0);
-    setFriends(data.result);
-  };
+  const { reloadPages, isLoading } = useScroll(
+    listRef,
+    2,
+    fetchFriends.bind(this, userId),
+    setFriends
+  );
+
+  useEffect(() => {
+    reloadPages();
+  }, [userId]);
 
   const friendAddedHandler = (friend: UserEntity) => {
     setFriends((prev) => [...prev, friend]);
@@ -53,7 +55,7 @@ const FriendList: FC<FriendListProps> = (props: FriendListProps) => {
   };
 
   return (
-    <div className={s["friend-list"]}>
+    <div className={s["friend-list"]} ref={listRef}>
       <Button as="button" onClick={() => setModal(!isModal)}>
         Add friend
       </Button>
@@ -67,6 +69,7 @@ const FriendList: FC<FriendListProps> = (props: FriendListProps) => {
               </Button>
             </div>
           ))}
+          {isLoading && <Spinner />}
         </div>
       ) : (
         <div>No friends was found</div>

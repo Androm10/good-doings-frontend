@@ -1,15 +1,17 @@
 import { DoingEntity } from "@/core/entities/doing.entity";
 import { Paginated } from "@/core/types/paginated";
+import { useScroll } from "@/shared/hooks/use-scroll";
 import { useUser } from "@/shared/hooks/use-user.hook";
 import { ApiService } from "@/shared/services/api.service";
 import { buildQuery } from "@/shared/utils/build-query";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import AddDoing from "../add-doing";
 import CrossSvg from "../svg/cross-svg";
 import PenSvg from "../svg/pen-svg";
 import Button from "../ui/button";
 import Input from "../ui/input";
 import Modal from "../ui/modal";
+import Spinner from "../ui/spinner";
 import DoingItem from "./doing-item";
 import s from "./doing-list.module.scss";
 
@@ -40,7 +42,6 @@ function updateDoing(
 const DoingList: FC<DoingListProps> = (props: DoingListProps) => {
   const { userId } = props;
   const { user } = useUser();
-  const [page, setPage] = useState(0);
   const [doings, setDoings] = useState<DoingEntity[]>([]);
 
   const [isModal, setModal] = useState(false);
@@ -50,14 +51,18 @@ const DoingList: FC<DoingListProps> = (props: DoingListProps) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
-  useEffect(() => {
-    reloadDoings();
-  }, [userId]);
+  const listRef = useRef<HTMLDivElement>(null);
 
-  const reloadDoings = () => {
-    setPage(0);
-    fetchDoings(userId, 0).then((data) => setDoings(data.result));
-  };
+  const { reloadPages, isLoading } = useScroll(
+    listRef,
+    2,
+    fetchDoings.bind(this, userId),
+    setDoings
+  );
+
+  useEffect(() => {
+    reloadPages();
+  }, [userId]);
 
   const addDoingHandler = (doing: DoingEntity) => {
     setDoings((prev) => [...prev, doing]);
@@ -116,7 +121,7 @@ const DoingList: FC<DoingListProps> = (props: DoingListProps) => {
 
   return (
     <>
-      <div className={s["doing-list"]}>
+      <div className={s["doing-list"]} ref={listRef}>
         {!!user && userId == user.id && (
           <Button as="button" onClick={() => setModal(!isModal)}>
             Add doing
@@ -145,6 +150,7 @@ const DoingList: FC<DoingListProps> = (props: DoingListProps) => {
                     </Button>
                   </div>
                 )}
+                {isLoading && <Spinner />}
               </div>
             ))}
           </>

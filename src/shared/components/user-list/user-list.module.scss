@@ -1,0 +1,12 @@
+.user-list {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 500px;
+}
+
+.user-list__content {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+  gap: 20px;
+}

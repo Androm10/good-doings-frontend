@@ -1,24 +1,20 @@
 import { UserEntity } from "@/core/entities/user.entity";
 import { Paginated } from "@/core/types/paginated";
 import { BASE_URL } from "@/shared/constants/api";
-import { ApiService } from "@/shared/services/api.service";
+import s from "./users-page.module.scss";
 import { FC, useState } from "react";
+import UserList from "@/shared/components/user-list";
 
 interface UsersPageProps {
   initialUsers: UserEntity[];
 }
 
 const UsersPage: FC<UsersPageProps> = ({ initialUsers }: UsersPageProps) => {
-  const [users, setUsers] = useState(initialUsers);
-
   return (
-    <div>
-      {users.map((user) => (
-        <div key={user.id}>
-          <div>{user.username}</div>
-          <div>{user.publicId}</div>
-        </div>
-      ))}
+    <div className={s["users-page"]}>
+      <div className={s["users-page__content"]}>
+        <UserList initialUsers={initialUsers} />
+      </div>
     </div>
   );
 };

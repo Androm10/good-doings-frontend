@@ -1,5 +1,5 @@
 import { FC, ReactElement } from "react";
-import SignupForm from "./components/signup-form";
+import SignupForm from "@shared/components/auth/signup-form";
 import s from "./signup-page.module.scss";
 import type { NextPageWithLayout } from "../_app";
 

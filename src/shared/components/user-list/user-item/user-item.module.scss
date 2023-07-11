@@ -1,0 +1,19 @@
+@import "../../../../scss/mixins/theme-aware.scss";
+@import "../../../../scss/constants/fonts.scss";
+
+.user-item {
+  @include theme-aware("color", "text-main-color");
+  @include theme-aware("background", "main-color");
+  display: flex;
+  gap: 20px;
+}
+
+.user-item__property {
+  padding: 10px;
+}
+
+.user-item__property-name {
+  @include theme-aware("color", "text-second-color");
+  font-size: $font-size-s;
+  display: block;
+}
